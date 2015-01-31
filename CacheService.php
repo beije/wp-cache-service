@@ -36,7 +36,7 @@ class CacheService {
 	}
 
 	/**
-	 * Deletes an item from the cache
+	 * Gets an item from the cache
 	 * 
 	 * @param  string $key     The unique key for the cache.
 	 * @param  mixed  $default (Optional) If value doesn't exist, return default
