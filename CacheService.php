@@ -188,4 +188,24 @@ class CacheService {
 		
 		return $cached;
 	}
+	
+	/**
+	 * Clears the cache completely
+	 *
+	 * @return void
+	 */
+	public static function emptyCache() {
+		global $wpdb;
+
+		$cachedItems = $wpdb->get_results("
+			SELECT * 
+			FROM  {$wpdb->options}
+			WHERE  option_name LIKE  '_transient_" . self::DOMAIN . "%'
+		");
+
+		foreach($cachedItems as $item) {
+			$cachedKey = str_replace('_transient_', '', $item->option_name);
+			delete_transient($cachedKey);
+		}
+	}
 }
