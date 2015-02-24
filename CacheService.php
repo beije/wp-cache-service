@@ -11,7 +11,7 @@ class CacheService {
 	 * @return string            The transient key.
 	 */
 	private static function _generateTransientKey($key) {
-		return self::DOMAIN . '_' . $key;
+		return self::DOMAIN . '_' . md5($key);
 	}
 
 	/**
@@ -135,7 +135,7 @@ class CacheService {
 	 * @return bool              True if added to cache
 	 */
 	public static function forever($key, $value) {
-		self::put($key, $value, 0);
+		return self::put($key, $value, 0);
 	}
 
 	/**
@@ -165,7 +165,7 @@ class CacheService {
 	 * @return mixed             Depending on the callback.
 	 */
 	public static function rememberForever($key, callable $cb, array $params = array()) {
-		self::remember($key, 0, $cb, $params);
+		return self::remember($key, 0, $cb, $params);
 	}
 
 	/**
